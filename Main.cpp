@@ -8,6 +8,22 @@
    Contact Discord: perle.btr
 */
 
+void toggleBoolean(bool& boolean) {
+    boolean = !boolean;
+}
+
+class ToggleAction {
+public:
+    ToggleAction(bool& toggle) : toggle(toggle) {}
+
+    void operator()() {
+        toggleBoolean(toggle);
+    }
+
+private:
+    bool& toggle;
+};
+
 class Ecstasy {
 public:
     Ecstasy(const std::string& title) : title(title) {}
@@ -107,22 +123,6 @@ void subOption2Function() {
     std::cout << "You chose Sub Option 2." << std::endl;
 }
 
-void toggleBoolean(bool& boolean) {
-    boolean = !boolean;
-}
-
-class ToggleAction {
-public:
-    ToggleAction(bool& toggle) : toggle(toggle) {}
-
-    void operator()() {
-        toggleBoolean(toggle);
-    }
-
-private:
-    bool& toggle;
-};
-
 void exitFunction() {
     exit(0);
 }
@@ -131,7 +131,7 @@ int main() {
     bool toggle1 = false;
     bool toggle2 = false;
 
-    Ecstasy ecstasy("Ecstasy");
+    Ecstasy ecstasy("Ecstasy Menu");
     ecstasy.addItem("Option 1", option1Function);
     ecstasy.addItem("Option 2", option2Function);
     ecstasy.addItemWithToggle("DoCleaning", toggle1);
